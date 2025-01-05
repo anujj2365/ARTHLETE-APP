@@ -1,16 +1,8 @@
+import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useRef } from 'react';
 import { StyleSheet, Text, View, Image, Animated } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { StatusBar } from 'expo-status-bar';
 
-// Import Signup Screen
-import Signup from './signup';
-
-// Create Stack Navigator
-const Stack = createStackNavigator();
-
-const LandingPage = ({ navigation }) => {
+export default function App() {
   // Animation value
   const logoPosition = useRef(new Animated.Value(300)).current; // Start off-screen (300 pixels below)
 
@@ -21,15 +13,7 @@ const LandingPage = ({ navigation }) => {
       duration: 1000, // Animation duration (1 second)
       useNativeDriver: true, // Use native driver for better performance
     }).start();
-
-    // Navigate to Signup after 2 seconds
-    const timer = setTimeout(() => {
-      navigation.navigate('Signup');
-    }, 2000);
-
-    // Cleanup timer
-    return () => clearTimeout(timer);
-  }, [navigation, logoPosition]);
+  }, [logoPosition]);
 
   return (
     <View style={styles.container}>
@@ -48,19 +32,6 @@ const LandingPage = ({ navigation }) => {
       <StatusBar style="light" />
     </View>
   );
-};
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        {/* Landing Page */}
-        <Stack.Screen name="LandingPage" component={LandingPage} />
-        {/* Signup Page */}
-        <Stack.Screen name="Signup" component={Signup} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
 }
 
 const styles = StyleSheet.create({
@@ -73,7 +44,7 @@ const styles = StyleSheet.create({
   logo: {
     width: 350, // Logo width
     height: 350, // Logo height
-    marginBottom: 40, // Space between the logo and the text
+    marginBottom: 30, // Space between the logo and the text
   },
   textContainer: {
     alignItems: 'center', // Align the text centrally
@@ -83,4 +54,4 @@ const styles = StyleSheet.create({
     fontSize: 34, // Adjust text size as needed
     fontWeight: 'bold', // Bold text for emphasis
   },
-});
+}); 
