@@ -7,24 +7,19 @@ import {
   ImageBackground,
   Image,
   StyleSheet,
-  Dimensions,
 } from 'react-native';
 
-const SignUpScreen = ({ navigation }) => {
+const SignInScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const handleSignUp = () => {
-    // Implement your signup logic here
-    console.log('Sign up pressed');
+  const handleSendOTP = () => {
+    // Implement your send OTP logic here
+    console.log('Send OTP pressed');
   };
 
   return (
     <ImageBackground
-      source={require('./assets/background.png')}
+      source={require('./assets/signup-background.png')}
       style={styles.backgroundImage}
       resizeMode="cover"
     >
@@ -36,69 +31,29 @@ const SignUpScreen = ({ navigation }) => {
       {/* Main Title */}
       <View style={styles.titleContainer}>
         <Text style={styles.titleText}>
-          <Text style={styles.titleMain}>ELEVATING{'\n'}</Text>
+          <Text style={styles.titleMain}>ELEVATING{ '\n'}</Text>
           <Text style={styles.titleSub}>FITNESS</Text>
         </Text>
       </View>
 
       {/* Grey Container */}
       <View style={styles.greyContainer}>
-        <Text style={styles.signUpHeader}>Sign Up</Text>
+        <Text style={styles.signInHeader}>Reset Password</Text>
 
         {/* Input Fields */}
         <View style={styles.inputsContainer}>
           <TextInput
             style={styles.input}
-            placeholder="Email/Phone"
+            placeholder="Email"
             placeholderTextColor="#999"
             value={email}
             onChangeText={setEmail}
           />
 
-          <View style={styles.passwordContainer}>
-            <TextInput
-              style={styles.passwordInput}
-              placeholder="Password"
-              placeholderTextColor="#999"
-              secureTextEntry={!showPassword}
-              value={password}
-              onChangeText={setPassword}
-            />
-            <TouchableOpacity
-              onPress={() => setShowPassword(!showPassword)}
-              style={styles.eyeIcon}
-            >
-              <Text>👁</Text>
-            </TouchableOpacity>
-          </View>
-
-          <View style={styles.passwordContainer}>
-            <TextInput
-              style={styles.passwordInput}
-              placeholder="Confirm Password"
-              placeholderTextColor="#999"
-              secureTextEntry={!showConfirmPassword}
-              value={confirmPassword}
-              onChangeText={setConfirmPassword}
-            />
-            <TouchableOpacity
-              onPress={() => setShowConfirmPassword(!showConfirmPassword)}
-              style={styles.eyeIcon}
-            >
-              <Text>👁</Text>
-            </TouchableOpacity>
-          </View>
-
-          <TouchableOpacity style={styles.signUpButton} onPress={handleSignUp}>
-            <Text style={styles.signUpButtonText}>Sign Up</Text>
+          {/* Send OTP Button */}
+          <TouchableOpacity style={styles.sendOTPButton} onPress={handleSendOTP}>
+            <Text style={styles.sendOTPButtonText}>Send OTP</Text>
           </TouchableOpacity>
-
-          <View style={styles.loginContainer}>
-            <Text style={styles.loginText}>Already a user? </Text>
-            <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-              <Text style={styles.loginLink}>Log in</Text>
-            </TouchableOpacity>
-          </View>
         </View>
       </View>
     </ImageBackground>
@@ -112,7 +67,7 @@ const styles = StyleSheet.create({
   },
   logoContainer: {
     position: 'absolute',
-    top: 40,
+    top: 50,
     left: 20,
   },
   logo: {
@@ -122,14 +77,14 @@ const styles = StyleSheet.create({
   },
   titleContainer: {
     position: 'absolute',
-    top: '20%', // Adjusted the position to move the text more down
+    top: '20%',
     left: 20,
   },
   titleText: {
     marginBottom: 20,
   },
   titleMain: {
-    fontSize: 36,
+    fontSize: 40,
     fontWeight: 'bold',
     color: '#FFFFFF',
     textShadowColor: 'rgba(128, 128, 128, 0.9)',
@@ -140,7 +95,7 @@ const styles = StyleSheet.create({
     fontSize: 36,
     fontWeight: 'bold',
     color: '#FFFFFF',
-    opacity: 0.5, // Set opacity to 60% for "FITNESS"
+    opacity: 0.5,
     textShadowColor: 'rgba(128, 128, 128, 0.9)',
     textShadowOffset: { width: 4, height: 4 },
     textShadowRadius: 8,
@@ -149,14 +104,14 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     width: '100%',
-    height: '52%', // Reduced container size by 20%
+    height: '45%',
     backgroundColor: '#221E1E',
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
     padding: 25,
     paddingBottom: 30,
   },
-  signUpHeader: {
+  signInHeader: {
     fontSize: 24,
     fontWeight: 'bold',
     color: '#FFFFFF',
@@ -180,34 +135,12 @@ const styles = StyleSheet.create({
     shadowRadius: 6,
     elevation: 8,
   },
-  passwordContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: 'rgba(255, 255, 255, 0.9)',
-    borderRadius: 20,
-    shadowColor: '#666',
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.5,
-    shadowRadius: 6,
-    elevation: 8,
-  },
-  passwordInput: {
-    flex: 1,
-    padding: 18,
-    fontSize: 16,
-  },
-  eyeIcon: {
-    padding: 15,
-  },
-  signUpButton: {
+  sendOTPButton: {
     backgroundColor: '#FF6B00',
     borderRadius: 20,
     padding: 18,
     alignItems: 'center',
-    marginTop: 5,
+    marginTop: 40,
     shadowColor: '#666',
     shadowOffset: {
       width: 0,
@@ -217,23 +150,11 @@ const styles = StyleSheet.create({
     shadowRadius: 6,
     elevation: 8,
   },
-  signUpButtonText: {
+  sendOTPButtonText: {
     color: '#FFFFFF',
     fontSize: 18,
     fontWeight: 'bold',
   },
-  loginContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    marginTop: 15,
-  },
-  loginText: {
-    color: '#FFFFFF',
-  },
-  loginLink: {
-    color: '#FF6B00',
-    fontWeight: 'bold',
-  },
 });
 
-export default SignUpScreen;
+export default SignInScreen;
