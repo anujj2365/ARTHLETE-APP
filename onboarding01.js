@@ -52,7 +52,6 @@ const OnboardingScreen = ({ navigation }) => {
             <View style={[styles.progressIndicator, styles.progressActive]} />
             <View style={[styles.progressIndicator, styles.progressActive]} />
             <View style={styles.progressIndicator} />
-            <View style={styles.progressIndicator} />
           </View>
         </View>
       </View>
